@@ -7,12 +7,12 @@ const Home = () => {
   return (
     <div className="home">
       {/* Hero Section */}
-      <section className="hero">
+      <section className="hero animate-fade-in">
         <div className="hero-image-container">
           <img src="/images/hero.png" alt="Children playing in a classic garden" className="hero-image" />
           <div className="hero-overlay">
-            <h1 className="hero-title">Timeless Style for the Next Generation</h1>
-            <Link to="/shop" className="btn btn-primary">Shop the Heritage Collection</Link>
+            <h1 className="hero-title animate-slide-up">Timeless Style for the Next Generation</h1>
+            <Link to="/shop" className="btn btn-primary animate-slide-up" style={{ animationDelay: '0.2s' }}>Shop the Heritage Collection</Link>
           </div>
         </div>
       </section>

@@ -68,6 +68,14 @@
 /* Product Cards */
 .product-card {
   cursor: pointer;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border-radius: 4px; /* Slight rounding for a premium feel */
+  padding-bottom: var(--spacing-sm);
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.05);
 }
 
 .product-image-container {

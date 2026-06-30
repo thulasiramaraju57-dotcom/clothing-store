@@ -36,10 +36,13 @@
   color: var(--color-primary);
   text-transform: uppercase;
   letter-spacing: 2px;
+  display: inline-block;
+  transition: transform var(--transition-normal);
 }
 
 .navbar-logo:hover {
   color: var(--color-primary);
+  transform: scale(1.05);
 }
 
 .nav-link {

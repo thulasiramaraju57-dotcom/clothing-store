@@ -15,10 +15,41 @@ const products = [
     name: 'Forest Green Linen Overall',
     price: '$75.00',
     collection: 'everyday',
-    image: '/images/product-2.png',
-    hoverImage: '/images/product-2-hover.png',
+    image: '/images/everyday.png', // Fallback to everyday for now
+    hoverImage: '/images/about.png', // Fallback to about for now
   },
-  // Add more products as needed
+  {
+    id: 3,
+    name: 'Burgundy Corduroy Dress',
+    price: '$95.00',
+    collection: 'heritage',
+    image: '/images/product-3.png',
+    hoverImage: '/images/product-3-hover.png',
+  },
+  {
+    id: 4,
+    name: 'Crisp Cream Button-Down',
+    price: '$65.00',
+    collection: 'everyday',
+    image: '/images/hero.png', // Placeholder
+    hoverImage: '/images/heritage.png', // Placeholder
+  },
+  {
+    id: 5,
+    name: 'Classic Navy Chinos',
+    price: '$70.00',
+    collection: 'everyday',
+    image: '/images/product-1.png', // Placeholder
+    hoverImage: '/images/everyday.png', // Placeholder
+  },
+  {
+    id: 6,
+    name: 'Wool Blend Peacoat',
+    price: '$125.00',
+    collection: 'heritage',
+    image: '/images/about.png', // Placeholder
+    hoverImage: '/images/hero.png', // Placeholder
+  }
 ];
 
 const Shop = () => {

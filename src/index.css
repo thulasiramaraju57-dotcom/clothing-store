@@ -112,6 +112,12 @@ img {
   border: none;
   transition: all var(--transition-normal);
   font-weight: 700;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn-primary {
@@ -122,6 +128,8 @@ img {
 .btn-primary:hover {
   background-color: var(--color-accent-gold);
   color: #fff;
+  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
@@ -133,6 +141,27 @@ img {
 .btn-secondary:hover {
   background-color: var(--color-primary);
   color: #fff;
+  box-shadow: 0 4px 12px rgba(26, 42, 58, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease forwards;
 }
 
 /* Section Spacing */

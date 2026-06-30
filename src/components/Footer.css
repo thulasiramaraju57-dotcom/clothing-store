@@ -1,0 +1,111 @@
+.footer {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: var(--spacing-3xl) 0 var(--spacing-md);
+  margin-top: auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+  }
+}
+
+.footer-logo {
+  font-family: var(--font-heading);
+  color: var(--color-background);
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-tagline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: var(--color-border);
+  margin-bottom: var(--spacing-lg);
+}
+
+.social-icons {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.social-link {
+  color: var(--color-background);
+  transition: color var(--transition-fast);
+}
+
+.social-link:hover {
+  color: var(--color-accent-gold);
+}
+
+.footer-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-background);
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-links a {
+  color: var(--color-border);
+  font-size: 0.875rem;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent-gold);
+}
+
+.footer-newsletter p {
+  color: var(--color-border);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.newsletter-form input {
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-background);
+}
+
+.newsletter-form input::placeholder {
+  color: var(--color-border);
+}
+
+.newsletter-form input:focus {
+  outline: none;
+  border-color: var(--color-accent-gold);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-border);
+  font-size: 0.75rem;
+}

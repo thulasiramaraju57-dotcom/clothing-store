@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, CreditCard } from 'lucide-react';
+import { CreditCard } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
@@ -11,10 +11,10 @@ const Footer = () => {
           <div className="footer-brand">
             <h2>Heirloom Kids</h2>
             <p>Timeless elegance for the modern playground. Crafted with love, designed for generations.</p>
-            <div className="social-links">
-              <a href="#" aria-label="Instagram"><Instagram size={20} /></a>
-              <a href="#" aria-label="Facebook"><Facebook size={20} /></a>
-              <a href="#" aria-label="Twitter"><Twitter size={20} /></a>
+            <div className="social-links" style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+              <a href="#" aria-label="Instagram">Instagram</a>
+              <a href="#" aria-label="Facebook">Facebook</a>
+              <a href="#" aria-label="Twitter">Twitter</a>
             </div>
           </div>
           

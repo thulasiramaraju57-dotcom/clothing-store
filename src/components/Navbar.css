@@ -50,6 +50,11 @@
   flex: 1;
 }
 
+.navbar-links {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
 .navbar-right {
   justify-content: flex-end;
 }

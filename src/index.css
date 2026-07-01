@@ -41,17 +41,6 @@
   --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -123,9 +112,7 @@ img {
 
 /* Buttons */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   font-family: var(--font-body);
   text-transform: uppercase;
   letter-spacing: 1px;

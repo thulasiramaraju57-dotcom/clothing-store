@@ -1,63 +1,33 @@
 import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '../lib/supabaseClient';
+import { Link } from 'react-router-dom';
 import './Shop.css';
-
-const products = [
-  {
-    id: 1,
-    name: 'Classic Cable Knit Sweater',
-    price: '$85.00',
-    collection: 'heritage',
-    image: '/images/product-1.png',
-    hoverImage: '/images/product-1-hover.png',
-  },
-  {
-    id: 2,
-    name: 'Forest Green Linen Overall',
-    price: '$75.00',
-    collection: 'everyday',
-    image: '/images/everyday.png', // Fallback to everyday for now
-    hoverImage: '/images/about.png', // Fallback to about for now
-  },
-  {
-    id: 3,
-    name: 'Burgundy Corduroy Dress',
-    price: '$95.00',
-    collection: 'heritage',
-    image: '/images/product-3.png',
-    hoverImage: '/images/product-3-hover.png',
-  },
-  {
-    id: 4,
-    name: 'Crisp Cream Button-Down',
-    price: '$65.00',
-    collection: 'everyday',
-    image: '/images/hero.png', // Placeholder
-    hoverImage: '/images/heritage.png', // Placeholder
-  },
-  {
-    id: 5,
-    name: 'Classic Navy Chinos',
-    price: '$70.00',
-    collection: 'everyday',
-    image: '/images/product-1.png', // Placeholder
-    hoverImage: '/images/everyday.png', // Placeholder
-  },
-  {
-    id: 6,
-    name: 'Wool Blend Peacoat',
-    price: '$125.00',
-    collection: 'heritage',
-    image: '/images/about.png', // Placeholder
-    hoverImage: '/images/hero.png', // Placeholder
-  }
-];
 
 const Shop = () => {
   const [filter, setFilter] = useState('all');
 
-  const filteredProducts = filter === 'all' 
-    ? products 
-    : products.filter(p => p.collection === filter);
+  const { data: products, isLoading, error } = useQuery({
+    queryKey: ['shop-products'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select(`
+          id, name, base_price, category, slug,
+          product_images (url)
+        `)
+        .eq('status', 'published')
+        .order('created_at', { ascending: false });
+        
+      if (error) throw error;
+      return data;
+    }
+  });
+
+  const filteredProducts = products?.filter(p => {
+    if (filter === 'all') return true;
+    return p.category.toLowerCase() === filter.toLowerCase();
+  }) || [];
 
   return (
     <div className="shop-page container section-padding">
@@ -70,7 +40,7 @@ const Shop = () => {
         <aside className="shop-sidebar">
           <h3>Filter By</h3>
           <div className="filter-group">
-            <h4>Collection</h4>
+            <h4>Category</h4>
             <ul>
               <li>
                 <button 
@@ -82,37 +52,71 @@ const Shop = () => {
               </li>
               <li>
                 <button 
-                  className={`filter-btn ${filter === 'heritage' ? 'active' : ''}`}
-                  onClick={() => setFilter('heritage')}
+                  className={`filter-btn ${filter === 'Boys' ? 'active' : ''}`}
+                  onClick={() => setFilter('Boys')}
                 >
-                  Heritage
+                  Boys
                 </button>
               </li>
               <li>
                 <button 
-                  className={`filter-btn ${filter === 'everyday' ? 'active' : ''}`}
-                  onClick={() => setFilter('everyday')}
+                  className={`filter-btn ${filter === 'Girls' ? 'active' : ''}`}
+                  onClick={() => setFilter('Girls')}
                 >
-                  Everyday
+                  Girls
+                </button>
+              </li>
+              <li>
+                <button 
+                  className={`filter-btn ${filter === 'Newborn' ? 'active' : ''}`}
+                  onClick={() => setFilter('Newborn')}
+                >
+                  Newborn
+                </button>
+              </li>
+              <li>
+                <button 
+                  className={`filter-btn ${filter === 'Accessories' ? 'active' : ''}`}
+                  onClick={() => setFilter('Accessories')}
+                >
+                  Accessories
                 </button>
               </li>
             </ul>
           </div>
         </aside>
 
-        <div className="shop-grid grid grid-3">
-          {filteredProducts.map(product => (
-            <div key={product.id} className="product-card">
-              <div className="product-image-container">
-                <img src={product.image} alt={product.name} className="product-image primary" />
-                <img src={product.hoverImage || product.image} alt={`${product.name} lifestyle`} className="product-image secondary" />
-              </div>
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-price">{product.price}</p>
-              </div>
+        <div className="shop-grid">
+          {isLoading ? (
+            <div className="loading-state">Loading collection...</div>
+          ) : error ? (
+            <div className="error-state">Failed to load products.</div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="empty-state text-muted">No products found in this category.</div>
+          ) : (
+            <div className="grid grid-3">
+              {filteredProducts.map(product => (
+                <Link to={`/product/${product.id}`} key={product.id} className="product-card" style={{ textDecoration: 'none' }}>
+                  <div className="product-image-container">
+                    <img 
+                      src={product.product_images?.[0]?.url || 'https://images.unsplash.com/photo-1552826978-8fc5fb653995?auto=format&fit=crop&q=80&w=600'} 
+                      alt={product.name} 
+                      className="product-image primary" 
+                    />
+                    <img 
+                      src={product.product_images?.[1]?.url || product.product_images?.[0]?.url || 'https://images.unsplash.com/photo-1552826978-8fc5fb653995?auto=format&fit=crop&q=80&w=600'} 
+                      alt={`${product.name} lifestyle`} 
+                      className="product-image secondary" 
+                    />
+                  </div>
+                  <div className="product-info">
+                    <h3 className="product-name" style={{ color: 'var(--color-text-main)' }}>{product.name}</h3>
+                    <p className="product-price" style={{ color: 'var(--color-text-main)' }}>₹{product.base_price}</p>
+                  </div>
+                </Link>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

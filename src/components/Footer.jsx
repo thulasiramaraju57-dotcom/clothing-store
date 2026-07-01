@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Instagram, Facebook, Twitter, CreditCard } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
@@ -7,50 +8,52 @@ const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
-          
           <div className="footer-brand">
-            <h2 className="footer-logo">Heirloom Kids Co.</h2>
-            <p className="footer-tagline">Crafted for childhood. Styled for generations.</p>
-            <div className="social-icons">
-              <a href="#" className="social-link">Instagram</a>
-              <a href="#" className="social-link">Facebook</a>
-              <a href="#" className="social-link">Twitter</a>
+            <h2>Heirloom Kids</h2>
+            <p>Timeless elegance for the modern playground. Crafted with love, designed for generations.</p>
+            <div className="social-links">
+              <a href="#" aria-label="Instagram"><Instagram size={20} /></a>
+              <a href="#" aria-label="Facebook"><Facebook size={20} /></a>
+              <a href="#" aria-label="Twitter"><Twitter size={20} /></a>
             </div>
           </div>
-
+          
           <div className="footer-links">
-            <h3 className="footer-title">Explore</h3>
+            <h3>Shop</h3>
             <ul>
-              <li><Link to="/shop">Shop All</Link></li>
-              <li><Link to="/shop?collection=heritage">Heritage Collection</Link></li>
-              <li><Link to="/shop?collection=everyday">Everyday Collection</Link></li>
-              <li><Link to="/about">Our Story</Link></li>
+              <li><Link to="/category/boys">Boys</Link></li>
+              <li><Link to="/category/girls">Girls</Link></li>
+              <li><Link to="/category/newborn">Newborn</Link></li>
+              <li><Link to="/category/accessories">Accessories</Link></li>
             </ul>
           </div>
-
+          
           <div className="footer-links">
-            <h3 className="footer-title">Customer Care</h3>
+            <h3>Support</h3>
             <ul>
-              <li><a href="#">Sizing Chart</a></li>
-              <li><a href="#">Shipping & Returns</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><Link to="/faq">FAQ</Link></li>
+              <li><Link to="/shipping-returns">Shipping & Returns</Link></li>
+              <li><Link to="/size-guide">Size Guide</Link></li>
+              <li><Link to="/contact">Contact Us</Link></li>
             </ul>
           </div>
-
+          
           <div className="footer-newsletter">
-            <h3 className="footer-title">Join Our Inner Circle</h3>
-            <p>Sign up for early access to new collections and exclusive offers.</p>
-            <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Your email address" required />
+            <h3>Join Our Newsletter</h3>
+            <p>Subscribe for exclusive collections and early access to sales.</p>
+            <form className="newsletter-form" onSubmit={(e) => { e.preventDefault(); alert("Thanks for subscribing!"); }}>
+              <input type="email" placeholder="Email Address" required />
               <button type="submit" className="btn btn-primary">Subscribe</button>
             </form>
           </div>
-          
         </div>
         
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Heirloom Kids Co. All rights reserved.</p>
+          <div className="payment-icons">
+            <CreditCard size={24} />
+            {/* Add more icons as needed */}
+          </div>
         </div>
       </div>
     </footer>
